@@ -48,7 +48,16 @@ public class ATM {
     }
 
     public boolean transferMoney(String fromAccount, String toAccount, double amount) {
-        return false;
+        if (!accounts.containsKey(fromAccount) || !accounts.containsKey(toAccount)) {
+            return false;
+        }
+        try {
+            withdrawMoney(fromAccount, amount);
+            depositMoney(toAccount, amount);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void audit() {
