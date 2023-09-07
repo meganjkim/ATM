@@ -14,8 +14,14 @@ public class ATM {
         accounts.put(userId, amount);
     }
 
-    public void closeAccount(String userId) {
-        return;
+    public void closeAccount(String userId) throws Exception {
+        if (!accounts.containsKey(userId)) {
+            throw new Exception("Error: not a valid account");
+        }
+        if (accounts.get(userId) != 0) {
+            throw new Exception("Error: Withdraw money before closing account");
+        }
+        accounts.remove(userId);
     }
 
     public double checkBalance(String userId) throws Exception {
