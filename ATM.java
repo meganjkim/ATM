@@ -18,8 +18,12 @@ public class ATM {
         return;
     }
 
-    public double checkBalance(String userId) {
-        return 1;
+    public double checkBalance(String userId) throws Exception {
+        if (!accounts.containsKey(userId)) {
+            throw new Exception("non valid user");
+        }
+
+        return accounts.get(userId);
     }
 
     public double depositMoney(String userId, double amount) {
