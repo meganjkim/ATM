@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import java.util.*;
+import java.io.*;
 
 public class ATM {
     private HashMap<String, Double> accounts = new HashMap<String, Double>();
@@ -60,8 +61,11 @@ public class ATM {
         }
     }
 
-    public void audit() {
-        return;
+    public void audit() throws IOException {
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("AccountAudit.txt")));
+        for (Map.Entry<String, Double> element : accounts.entrySet()) {
+            writer.println("UserID: " + element.getKey() + " Balance: " + element.getValue());
+        }
+        writer.close();
     }
-
 }
