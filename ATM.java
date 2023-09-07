@@ -16,24 +16,27 @@ public class ATM {
 
     public void closeAccount(String userId) throws Exception {
         if (!accounts.containsKey(userId)) {
-            throw new Exception("Error: not a valid account");
+            throw new Exception("Error: Not a valid account.");
         }
         if (accounts.get(userId) != 0) {
-            throw new Exception("Error: Withdraw money before closing account");
+            throw new Exception("Error: Withdraw money before closing account.");
         }
         accounts.remove(userId);
     }
 
     public double checkBalance(String userId) throws Exception {
         if (!accounts.containsKey(userId)) {
-            throw new Exception("non valid user");
+            throw new Exception("Error: User does not exist.");
         }
-
         return accounts.get(userId);
     }
 
-    public double depositMoney(String userId, double amount) {
-        return 1;
+    public double depositMoney(String userId, double amount) throws Exception {
+        if (!accounts.containsKey(userId)) {
+            throw new Exception("You're broke AF.");
+        }
+        accounts.put(userId, accounts.get(userId) + amount);
+        return amount;
     }
 
     public double withdrawMoney(String userId, double amount) {
