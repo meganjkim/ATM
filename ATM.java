@@ -39,8 +39,12 @@ public class ATM {
         return amount;
     }
 
-    public double withdrawMoney(String userId, double amount) {
-        return 1;
+    public double withdrawMoney(String userId, double amount) throws Exception {
+        if (!accounts.containsKey(userId) || accounts.get(userId) < amount) {
+            throw new Exception("You're broke AF.");
+        }
+        accounts.put(userId, accounts.get(userId) - amount);
+        return amount;
     }
 
     public boolean transferMoney(String fromAccount, String toAccount, double amount) {
